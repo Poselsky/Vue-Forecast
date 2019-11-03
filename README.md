@@ -10,6 +10,7 @@ Simple and neat forecast application for your website. (Uses api from https://op
 **App is still under development. You might find some issues as responsiveness.**
 
 Preview: 
+![Preview](https://github.com/Poselsky/Vue-Forecast/blob/master/Example.PNG "How app should look like.")
 
 ## Project setup
 ```
