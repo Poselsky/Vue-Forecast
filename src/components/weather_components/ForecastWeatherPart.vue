@@ -48,6 +48,10 @@ $height: $width/3;
     border-radius: 20px;
     text-transform: uppercase;
 
+    &:hover{
+        width: $width+10px;
+    }
+
     >.time_degrees_wind{
         grid-column: 1/2;
         padding-left: 10px;

@@ -17,8 +17,11 @@
                 <p class="datetime">{{getTime(weatherData.dt)}}</p>
                 <p class="temperature">{{weatherData.main.temp}} °C</p>
             </div>
-            <div class="forecast_wrap">
-                <forecast-weather-part v-bind:forecastData="data" v-for="data in forecastData.list" v-bind:key="data.dt"/>
+
+            <div class="forecast_absolute_wrap">
+                <div class="forecast_wrap">
+                    <forecast-weather-part v-bind:forecastData="data" v-for="data in forecastData.list" v-bind:key="data.dt"/>
+                </div>
             </div>
         </div>
       </div>
@@ -29,6 +32,7 @@
 import NowWeatherPart from "./NowWeatherPart";
 import ForecastWeatherPart from './ForecastWeatherPart';
 import Colors from '../colorsWeather'
+import Velocity from 'velocity-animate';
 
 export default {
     props:["weatherData","forecastData"],
@@ -64,6 +68,9 @@ export default {
 
             return utcString.slice(-12, -7);
         },
+        async animateForecast(){
+            Velocity(document.querySelector('.forecast_wrap'), { top: 0 }, { duration: 500 }, {});
+        }
     },
     computed:{
         chosenData:function(){
@@ -76,7 +83,7 @@ export default {
         },
     },
     mounted(){
-
+        this.animateForecast();
     }
 }
 </script>
@@ -112,20 +119,29 @@ export default {
                 display: grid;
                 padding-bottom: 20px;
                 row-gap: 20px;
+                grid-template-rows: auto 1fr;
+                width: 100%;
+                height: 100%;
                                 
-                >.additional_desc{
+                .additional_desc{
                     grid-row: 1/2;
                     font-size: 2rem;
                     text-align: end;
                 }
-                >.forecast_wrap{
-                    align-self: flex-end;
-                    display: grid;
-                    row-gap: 20px;
-                    
+                .forecast_absolute_wrap{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    overflow: hidden;
+                    .forecast_wrap{
+                        top: -500px;
+                        left:10%;
+                        position: absolute;
+                        align-self: flex-end;
+                        display: grid;
+                        row-gap: 20px;
+                    }
                 }
-
-
             }
         }
 
