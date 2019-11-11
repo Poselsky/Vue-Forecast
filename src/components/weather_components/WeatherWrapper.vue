@@ -3,7 +3,7 @@
       <div class="main_card" v-if="forecast.loaded">
         <main-weather-card v-bind:weatherData="weather.data.firstEl" v-bind:forecastData="forecast.data"/>
       </div>
-      <div class="weather_cards" v-bind:style="{backgroundColor: colors.colors.midDarkestGrey, gap}" v-on:wheel.prevent="scrollX">
+      <div class="weather_cards" v-bind:style="{backgroundColor: colors.colors.midDarkestGrey, gap}" v-on:wheel="scrollX">
         <weather-card v-bind:weatherData="data" v-for="data in weather.data.list" v-bind:key="data.name" v-on:show-id="getWeather" />
       </div>
     </div>
@@ -86,6 +86,13 @@ export default {
       } else if(event.deltaY < 0) {
         document.querySelector('.weather_cards').scrollLeft -=percent;
       }
+
+      //Preventing default, if scroll is not on the end
+
+      const scrollLeftOffset = event.currentTarget.scrollLeft;
+      if(scrollLeftOffset != 0 && (event.currentTarget.clientWidth + scrollLeftOffset) != event.currentTarget.scrollWidth){
+        event.preventDefault();
+      }
     }
   },
   computed:{
@@ -121,16 +128,27 @@ export default {
 .weather_wrapper{
   display: grid;
   height: inherit;
-  grid-template-columns: repeat(2, 50%);
   width: inherit;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+  @media (max-width: 1024px) {
+    grid-template-rows: repeat(2, 1fr);
+  }
+
   .main_card{
-    grid-column: 1/2;
+    @media (min-width: 1024px) {
+      grid-column: 1/2;
+    }
     width: 100%;
     height: 100%
   }
 
   .weather_cards{
-    grid-column: 2/3;
+    @media (min-width: 1024px) {
+      grid-column: 2/3;
+    }
     width: 100%;
     height: 100%;
     display: grid;

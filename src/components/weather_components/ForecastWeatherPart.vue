@@ -47,9 +47,11 @@ $height: $width/3;
     grid-template-columns: 1fr 2fr $height/2;
     border-radius: 20px;
     text-transform: uppercase;
+    transition: 500ms;
 
     &:hover{
         width: $width+10px;
+        transition: 500ms;
     }
 
     >.time_degrees_wind{
