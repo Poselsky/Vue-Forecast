@@ -16,16 +16,12 @@
 </template>
 
 <script>
-import getIconUrl from './helperFunctions/iconUrl';
 import ColorsWeather from '../colorsWeather';
-import ColorThief from 'colorthief';
+import setBackgroundByImage from './helperFunctions/setBackgroundByImage';
 
 export default {
     props:["weatherDataNow"],
     methods: {
-        getUrl(icon){
-            return getIconUrl(icon);
-        },
         addCssToChildren(){
             const children = document.querySelector('.weather').children;
             [].forEach.call(children, ((el, index) => {
@@ -38,27 +34,8 @@ export default {
                 }
             }));
         },
-        weatherIconBackgroundColor(icon){
-            const colorThief = new ColorThief();
-            const image = new Image();
-            image.crossOrigin = "Anonymous";
-            image.onload = ((event)=>{
-                const parent = document.querySelector('.image');
-                parent.appendChild(event.target);
-                const colors = colorThief.getColor(event.target);
-                const palette = colorThief.getPalette(event.target);
-                const colorsString = `${colors[0]},${colors[1]},${colors[2]}`;
-                parent.style.backgroundColor = `rgba(${colorsString}, 0.2)`;
-                parent.style.border = `10px solid rgba(${colorsString}, 0.1)`;
-                parent.style.boxShadow = `0px 0px 30px 0px rgba(0,0,0,0.5)`
-
-                const secondColor= `${palette[1][0]},${palette[1][1]},${palette[1][2]}`;
-                event.target.style.backgroundColor = `rgba(${secondColor}, 0.1)`;
-                event.target.style.borderRadius = "100%";
-                event.target.style.boxShadow = `0px 0px 10px 0px rgba(${secondColor},0.4)`
-            });
-            image.src = this.getUrl(icon);
-            
+        weatherIconBackgroundColor(icon, selector){
+            setBackgroundByImage(icon,selector);
         }
     },
     data: function(){
@@ -70,7 +47,7 @@ export default {
     },
     mounted:function(){
         this.addCssToChildren();
-        this.weatherIconBackgroundColor(this.weatherDataNow.icon);
+        this.weatherIconBackgroundColor(this.weatherDataNow.icon, document.querySelector('.image'));
     }
 }
 </script>

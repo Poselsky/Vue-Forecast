@@ -7,7 +7,8 @@ export default class Colors{
             midDarkestGrey: "#C9C7C7",
             midDarkGrey: "#E1E1E1",
 
-            fourhtColor: "#FBEFE5"
+            fourhtColor: "#FBEFE5",
+            backgroundColor: "rgb(255, 200, 150)"
         }
     }
 }

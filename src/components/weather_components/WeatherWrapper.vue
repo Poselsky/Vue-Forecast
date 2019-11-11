@@ -1,8 +1,14 @@
 <template>
-    <div class="weather_wrapper" v-if="weather.loaded">
-      <div class="main_card" v-if="forecast.loaded">
-        <main-weather-card v-bind:weatherData="weather.data.firstEl" v-bind:forecastData="forecast.data"/>
+    <div class="weather_wrapper" v-if="weather.loaded" >
+      <div class="main_card" v-bind:style="{ backgroundColor: colors.colors.backgroundColor}">
+        <main-weather-card v-if="forecast.loaded" v-bind:weatherData="weather.data.firstEl" v-bind:forecastData="forecast.data"/>
+        <div class="lds_ellipsis" v-else>
+          <div v-for="el in Array.from(Array(4).keys())" v-bind:key="el" v-bind:style="{backgroundColor: colors.colors.mostDarkestGrey}">
+          </div>
+        </div>
       </div>
+
+
       <div class="weather_cards" v-bind:style="{backgroundColor: colors.colors.midDarkestGrey, gap}" v-on:wheel="scrollX">
         <weather-card v-bind:weatherData="data" v-for="data in weather.data.list" v-bind:key="data.name" v-on:show-id="getWeather" />
       </div>
@@ -80,19 +86,29 @@ export default {
     },
     scrollX(event){
       const parent = document.querySelector('.weather_cards');
-      const percent = parent.clientWidth / 10;
+      const percent = parent.clientWidth / 20;
       if(event.deltaY > 0){
-        document.querySelector('.weather_cards').scrollLeft+=percent;
+        parent.scrollLeft+=percent;
       } else if(event.deltaY < 0) {
-        document.querySelector('.weather_cards').scrollLeft -=percent;
+        parent.scrollLeft -=percent;
       }
 
       //Preventing default, if scroll is not on the end
 
       const scrollLeftOffset = event.currentTarget.scrollLeft;
-      if(scrollLeftOffset != 0 && (event.currentTarget.clientWidth + scrollLeftOffset) != event.currentTarget.scrollWidth){
+      //2 pixels on left and right
+      const jsFloatError = 2;
+      if(scrollLeftOffset > jsFloatError && (event.currentTarget.clientWidth + scrollLeftOffset) < event.currentTarget.scrollWidth - jsFloatError){
         event.preventDefault();
       }
+
+    },
+    addBackground(event){
+      event.currentTarget.children.forEach(el => {
+        el.style.backgroundColor = this.colors.colors.midDarkestGrey;
+      });
+
+      console.log('loading')
     }
   },
   computed:{
@@ -114,8 +130,6 @@ export default {
         data: dataList[0],
       }
     },
-  },
-  watch:{
   },
   mounted:function(){
     this.weatherFetcher();
@@ -142,7 +156,8 @@ export default {
       grid-column: 1/2;
     }
     width: 100%;
-    height: 100%
+    height: 100%;
+    display: grid;
   }
 
   .weather_cards{
@@ -162,7 +177,7 @@ export default {
     }
  
     &::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     }
     
     &::-webkit-scrollbar-thumb {
@@ -170,8 +185,65 @@ export default {
       outline: 1px solid slategrey;
     }
   }
-
-  
 }
+
+.lds_ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  justify-self: center;
+  margin-top: 10%;
+}
+.lds_ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds_ellipsis div:nth-child(1) {
+  left: 6px;
+  animation: lds_ellipsis1 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(2) {
+  left: 6px;
+  animation: lds_ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(3) {
+  left: 36px;
+  animation: lds_ellipsis2 0.6s infinite;
+}
+.lds_ellipsis div:nth-child(4) {
+  left: 55px;
+  animation: lds_ellipsis3 0.6s infinite;
+}
+@keyframes lds_ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds_ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds_ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(30px, 0);
+  }
+}
+
+
 
 </style>
