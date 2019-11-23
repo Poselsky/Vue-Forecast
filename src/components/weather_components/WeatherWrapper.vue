@@ -41,14 +41,16 @@ export default {
         data:{}
       },
       apiKey:process.env.VUE_APP_API_KEY,
+      lat: process.env.VUE_APP_LAT,
+      lon: process.env.VUE_APP_LON,
       colors: colorsWeather,
       gap: "2px",
     }
   },
   methods: {
     weatherFetcher: function() {
-      
-      axios.get(`https://api.openweathermap.org/data/2.5/find?lat=50.68&lon=13.86&cnt=10&appid=${this.apiKey}&mode=json&units=metric`)
+      console.log(process.env)
+      axios.get(`https://api.openweathermap.org/data/2.5/find?lat=${this.lat}&lon=${this.lon}&cnt=10&appid=${this.apiKey}&mode=json&units=metric`)
       .then(response => {
           this.weather.data.firstEl = response.data.list[0];
           this.weather.data.list = response.data.list.slice(1,response.data.list.length);

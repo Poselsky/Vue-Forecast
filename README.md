@@ -4,10 +4,10 @@ Simple and neat forecast application for your website. (Uses api from https://op
 ### How to use:
 
 1. Register and generate your api key [here](https://openweathermap.org/)
-2. Add your api key in .env file.
+2. Add your api key in .env file and add longtitude and latitude of desired city
 3. Enjoy
 
-**App is still under development. You might find some issues as responsiveness.**
+**App is still under development. You might find some issues. For example responsiveness.**
 
 Preview: 
 ![Preview](https://github.com/Poselsky/Vue-Forecast/blob/master/Example.PNG "How app should look like.")
