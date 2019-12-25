@@ -6,7 +6,7 @@
 
 <script>
 
-import WeatherWrapper from './components/weather_components/WeatherWrapper';
+import WeatherWrapper from './components/weather_components/WeatherMain/WeatherWrapper';
 
 export default{
     name: "main-component",

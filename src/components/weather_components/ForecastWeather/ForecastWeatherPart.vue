@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import colorsWeather from '../colorsWeather';
-import iconUrl from './helperFunctions/iconUrl';
+import colorsWeather from '../../colorsWeather';
+import iconUrl from '../../../helperFunctions/iconUrl';
 
 export default {
     props:["forecastData"],

@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import NowWeatherPart from "./NowWeatherPart";
-import ForecastWeatherPart from './ForecastWeatherPart';
-import Colors from '../colorsWeather'
+import NowWeatherPart from "../NowWeatherPart/NowWeatherPart";
+import ForecastWeatherPart from '../ForecastWeather/ForecastWeatherPart';
+import Colors from '../../colorsWeather'
 import Velocity from 'velocity-animate';
 
 export default {

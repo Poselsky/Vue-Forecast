@@ -15,12 +15,12 @@
     </div>
 </template>
 
-<script>
+<script>P
 
-import WeatherCard from './WeatherCard';
-import MainWeatherCard from './MainWeatherCard';
+import WeatherCard from '../WeatherCard/WeatherCard';
+import MainWeatherCard from '../MainWeatherCard/MainWeatherCard';
 import axios from 'axios';
-import colorsWeather from '../colorsWeather';
+import colorsWeather from '../../colorsWeather';
 
 export default {
   components:{
@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     weatherFetcher: function() {
-      console.log(process.env)
       axios.get(`https://api.openweathermap.org/data/2.5/find?lat=${this.lat}&lon=${this.lon}&cnt=10&appid=${this.apiKey}&mode=json&units=metric`)
       .then(response => {
           this.weather.data.firstEl = response.data.list[0];
@@ -109,8 +108,6 @@ export default {
       event.currentTarget.children.forEach(el => {
         el.style.backgroundColor = this.colors.colors.midDarkestGrey;
       });
-
-      console.log('loading')
     }
   },
   computed:{

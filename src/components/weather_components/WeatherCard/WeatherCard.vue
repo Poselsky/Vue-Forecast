@@ -40,8 +40,8 @@
 
 
 <script>
-import ColorsWeather from '../colorsWeather.js';
-import getIconUrl from './helperFunctions/iconUrl';
+import ColorsWeather from '../../colorsWeather.js';
+import getIconUrl from '../../../helperFunctions/iconUrl';
 
 export default {
   props:["weatherData"],

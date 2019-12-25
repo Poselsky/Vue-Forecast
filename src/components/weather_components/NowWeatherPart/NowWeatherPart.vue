@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import ColorsWeather from '../colorsWeather';
-import setBackgroundByImage from './helperFunctions/setBackgroundByImage';
+import ColorsWeather from '../../colorsWeather';
+import setBackgroundByImage from '../../../helperFunctions/setBackgroundByImage';
 
 export default {
     props:["weatherDataNow"],
