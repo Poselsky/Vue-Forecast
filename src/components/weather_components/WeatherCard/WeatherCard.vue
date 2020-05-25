@@ -55,13 +55,6 @@ export default {
   },
   methods:{
     getTime(unixTime){
-      /*
-      const date = new Date();
-      const hours = date.getHours() < 10 ? "0"+date.getHours() : date.getHours();
-      const minutes = date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes();
-      return `${hours}:${minutes}`;
-      */
-
       const dateObj = new Date(unixTime * 1000); 
       const utcString = dateObj.toUTCString(); 
 
@@ -69,7 +62,7 @@ export default {
     },
     getUrl(icon){
       return getIconUrl(icon);
-    }
+    },
   }
 }
 </script>
@@ -77,10 +70,11 @@ export default {
 <style lang="scss" scoped>
 .weather_card{
   width:400px;
-  height: 400px;
+  height: 100%;
   display: grid;
   grid-template-rows: repeat(3,1fr);
-  
+
+
   >.upper{
     grid-row: 1/2;
     display: grid;

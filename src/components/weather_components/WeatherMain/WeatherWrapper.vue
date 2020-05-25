@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<script>P
+<script>
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import MainWeatherCard from '../MainWeatherCard/MainWeatherCard';
@@ -24,8 +24,8 @@ import colorsWeather from '../../colorsWeather';
 
 export default {
   components:{
-    "weather-card": WeatherCard,
-    "main-weather-card": MainWeatherCard
+    WeatherCard,
+    MainWeatherCard
   },
   data:function(){
     return {
@@ -109,26 +109,6 @@ export default {
         el.style.backgroundColor = this.colors.colors.midDarkestGrey;
       });
     }
-  },
-  computed:{
-    weatherDataExceptFirst:{
-      get(){
-        let dataList = [];
-        for(let i = 1; i< this.weather.data.list.length; i++){
-          dataList.push(this.weather.data.list[i]);
-        }
-        return dataList;
-      },
-    }   
-  },
-  weatherDataFirstElement:{
-    get(){
-      let dataList = this.weather.data.list;
-      return {
-        loaded: this.weather.loaded,
-        data: dataList[0],
-      }
-    },
   },
   mounted:function(){
     this.weatherFetcher();
@@ -218,6 +198,8 @@ export default {
   left: 55px;
   animation: lds_ellipsis3 0.6s infinite;
 }
+
+// Load animation
 @keyframes lds_ellipsis1 {
   0% {
     transform: scale(0);

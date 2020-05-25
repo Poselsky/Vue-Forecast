@@ -12,7 +12,7 @@ export default{
     name: "main-component",
     
     components:{
-        'weather-wrapper': WeatherWrapper
+        WeatherWrapper
     }
 };
 
@@ -23,7 +23,6 @@ export default{
 body{
     font-family: 'Lato', sans-serif;
     width: 100vw;
-    height: 100%;
     margin: 0;
     overflow-x: hidden;
 }

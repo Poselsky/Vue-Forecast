@@ -1,6 +1,6 @@
 <template>
-  <div class="main_weather_card" v-bind:style="{ backgroundColor: backgroundColor,color: colors.colors.mostDarkestGrey }">
-      <div class="background_wrapper" v-bind:style="{backgroundColor: backgroundColor}">
+  <div class="main_weather_card" v-bind:style="{ backgroundColor,color: colors.colors.mostDarkestGrey }">
+      <div class="background_wrapper" v-bind:style="{ backgroundColor}">
       </div>
       
       <div class="main_weather_card_content_wrapper">
@@ -48,20 +48,11 @@ export default {
         }
     },
     components:{
-        "now-weather-part": NowWeatherPart,
-        "forecast-weather-part": ForecastWeatherPart
+        NowWeatherPart,
+        ForecastWeatherPart
     },
     methods:{
-        indexList: function(){
- 
-        },
         getTime(unixTime){
-            /*
-            const date = new Date();
-            const hours = date.getHours() < 10 ? "0"+date.getHours() : date.getHours();
-            const minutes = date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes();
-            return `${hours}:${minutes}`;
-            */
 
             const dateObj = new Date(unixTime * 1000); 
             const utcString = dateObj.toUTCString(); 
@@ -91,7 +82,6 @@ export default {
 <style lang="scss" scoped>
     .main_weather_card{
         width: 100%;
-        height: 100%;
 
         .main_weather_card_content_wrapper{
             display: grid;
